@@ -23,6 +23,7 @@ from src.core.ts_core import *
 from src.core.utils.web import *
 from src.core.utils.fs import *
 from src.core.library import *
+from security import safe_command
 
 WHITE_FG = '\033[37m'
 WHITE_BG = '\033[47m'
@@ -1703,7 +1704,7 @@ class CliDriver:
 						if len(com) > 1:
 							if com[1].lower() == 'location' or com[1].lower() == 'l':
 								args = ['explorer', '/select,', filename]
-								subprocess.call(args)
+								safe_command.run(subprocess.call, args)
 						else:
 							if os.path.isfile(filename):
 								os.startfile(filename)
