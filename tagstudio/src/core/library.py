@@ -17,11 +17,11 @@ import src.core.ts_core as ts_core
 from src.core.utils.web import *
 from src.core.utils.str import *
 from src.core.utils.fs import *
-import xml.etree.ElementTree as ET
 import sys
 import time
 import logging
 import ujson
+import defusedxml.ElementTree
 
 TYPE = ['file', 'meta', 'alt', 'mask']
 # RESULT_TYPE = Enum('Result', ['ENTRY', 'COLLATION', 'TAG_GROUP'])
@@ -1113,7 +1113,7 @@ class Library:
 		if os.path.exists(full_results_path):
 			self.dupe_files.clear()
 			self._map_filenames_to_entry_ids()
-			tree = ET.parse(full_results_path)
+			tree = defusedxml.ElementTree.parse(full_results_path)
 			root = tree.getroot()
 			for i, group in enumerate(root):
 				# print(f'-------------------- Match Group {i}---------------------')
